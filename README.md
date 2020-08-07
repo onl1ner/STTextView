@@ -3,6 +3,7 @@
 <p><h1 align="left">STTextView</h1></p>
 
 ![](https://cocoapod-badges.herokuapp.com/p/STTextView/badge.png)
+![](https://img.shields.io/badge/iOS-10.0%2B-blue)
 ![](https://cocoapod-badges.herokuapp.com/v/STTextView/badge.png)
 ![](https://cocoapod-badges.herokuapp.com/l/STTextView/badge.(png|svg))
 ![](https://img.shields.io/badge/Swift-5-orange?logo=Swift&logoColor=white)
