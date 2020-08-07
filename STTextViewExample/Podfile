@@ -1,0 +1,5 @@
+target 'STTextViewExample' do
+  use_frameworks!
+  
+  pod "STTextView"
+end

@@ -1,0 +1,6 @@
+framework module STTextView {
+  umbrella header "STTextView-umbrella.h"
+
+  export *
+  module * { export * }
+}

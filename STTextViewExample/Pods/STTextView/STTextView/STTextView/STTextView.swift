@@ -136,11 +136,6 @@ import UIKit
         addPlaceholder()
     }
     
-    public override init(frame: CGRect, textContainer: NSTextContainer?) {
-        // To avoid Interface Builder render and auto-layout issues
-        super.init(frame: frame, textContainer: textContainer)
-    }
-    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
