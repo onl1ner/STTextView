@@ -58,6 +58,13 @@ import UIKit
     /// If true placeholder text will hide when user starts editing.
     public var shouldHidePlaceholderOnEditing : Bool = false
     
+    // We have to check if text property is changing at runtime.
+    open override var text: String! {
+        didSet {
+            self.placeholderLabel.isHidden = !self.text.isEmpty
+        }
+    }
+    
     lazy private var placeholderLabel : UILabel = {
         let label = UILabel()
         
