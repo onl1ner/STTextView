@@ -27,73 +27,75 @@ import UIKit
     /// Placeholder string that will be shown in your TextView.
     @IBInspectable public var placeholder : String = "Enter your placeholder" {
         didSet {
-            self.placeholderLabel.text = placeholder
+            self.placeholderTextView.text = placeholder
         }
     }
     
     /// Color that would be applied to your placeholder text.
     @IBInspectable public var placeholderColor : UIColor = .gray {
         didSet {
-            self.placeholderLabel.textColor = placeholderColor
-        }
-    }
-    
-    /// Attributed placeholder to show your attributed string.
-    public var attributedPlaceholder : NSAttributedString? {
-        didSet {
-            self.placeholderLabel.text = nil
-            self.placeholderLabel.attributedText = attributedPlaceholder
-        }
-    }
-    
-    /// Inset of a content inside your TextView. Do not use UITextView.contentInset property to change the inset.
-    public var textInset : UIEdgeInsets {
-        get { return self.textContainerInset }
-        set {
-            self.textContainerInset = newValue
-            self.updateLayout()
+            self.placeholderTextView.textColor = placeholderColor
         }
     }
     
     /// If true placeholder text will hide when user starts editing.
-    public var shouldHidePlaceholderOnEditing : Bool = false
+    @IBInspectable public var shouldHidePlaceholderOnEditing : Bool = false
     
-    // We have to check if text property is changing at runtime.
-    open override var text: String! {
+    /// Attributed placeholder to show your attributed string.
+    public var attributedPlaceholder : NSAttributedString? {
         didSet {
-            self.placeholderLabel.isHidden = !self.text.isEmpty
+            if attributedPlaceholder != nil {
+                self.placeholderTextView.text = nil
+                self.placeholderTextView.attributedText = attributedPlaceholder
+            }
         }
     }
     
-    lazy private var placeholderLabel : UILabel = {
-        let label = UILabel()
+    // We have to check if text property is changing at runtime.
+    public override var text: String! {
+        didSet {
+            self.placeholderTextView.isHidden = !self.text.isEmpty
+        }
+    }
+    
+    public override var contentInset: UIEdgeInsets {
+        didSet {
+            self.placeholderTextView.contentInset = self.contentInset
+        }
+    }
+    
+    lazy private var placeholderTextView : UITextView = {
+        let textView = UITextView()
         
-        label.text = self.placeholder
-        label.textColor = self.placeholderColor
+        textView.text = self.placeholder
+        textView.textColor = self.placeholderColor
         
-        label.font = self.font
-        label.textAlignment = self.textAlignment
+        textView.font = self.font
         
-        label.numberOfLines = 0
-        label.backgroundColor = .clear
+        textView.textAlignment = self.textAlignment
+        textView.contentInset = self.contentInset
         
-        label.isUserInteractionEnabled = false
-        label.translatesAutoresizingMaskIntoConstraints = false
+        textView.frame = self.bounds
         
-        return label
+        textView.backgroundColor = .clear
+        
+        textView.isUserInteractionEnabled = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textView
     }()
     
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView.text.isEmpty {
             if shouldHidePlaceholderOnEditing {
-                placeholderLabel.isHidden = true
+                placeholderTextView.isHidden = true
             }
         }
         return true
     }
     
     public func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        placeholderLabel.isHidden = !textView.text.isEmpty
+        placeholderTextView.isHidden = !textView.text.isEmpty
         return true
     }
     
@@ -101,44 +103,44 @@ import UIKit
         let currentContent : NSString = NSString(string: textView.text)
         let newContent = currentContent.replacingCharacters(in: range, with: text)
         
-        self.placeholderLabel.isHidden = !newContent.isEmpty
+        self.placeholderTextView.isHidden = !newContent.isEmpty
         
         return true
     }
     
-    private func updateLayout() -> () {
-        self.constraints.forEach { (constraint) in
-            if let firstItem = constraint.firstItem as? UILabel {
-                if firstItem == placeholderLabel { self.removeConstraint(constraint) }
-            }
-        }
+    // Method is used to update the placeholderTextView whenever
+    // the TextView changes in Interface Builder.
+    private func updatePlaceholder() -> () {
+        placeholderTextView.text = placeholder
+        placeholderTextView.textColor = placeholderColor
         
-        NSLayoutConstraint.activate(
-            [placeholderLabel.topAnchor.constraint(equalTo: self.topAnchor,
-                                                   constant: self.textContainerInset.top),
-             placeholderLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                                       constant: self.textContainerInset.left + self.textContainer.lineFragmentPadding),
-             placeholderLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                                        constant: -self.textContainerInset.right),
-             placeholderLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,
-                                                      constant: -self.textContainerInset.bottom)])
-    }
-    
-    private func addPlaceholder() -> () {
-        self.insertSubview(placeholderLabel, at: 0)
-        
-        updateLayout()
+        placeholderTextView.font = self.font
+        placeholderTextView.textAlignment = self.textAlignment
     }
     
     private func initialConfiguration() -> () {
         self.delegate = self
         
-        addPlaceholder()
+        self.insertSubview(placeholderTextView, at: 0)
+    }
+    
+    public override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        
+        updatePlaceholder()
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        placeholderTextView.frame = self.bounds
     }
     
     public override init(frame: CGRect, textContainer: NSTextContainer?) {
         // To avoid Interface Builder render and auto-layout issues
         super.init(frame: frame, textContainer: textContainer)
+        
+        initialConfiguration()
     }
     
     required public init?(coder aDecoder: NSCoder) {
