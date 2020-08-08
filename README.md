@@ -18,21 +18,46 @@
 Framework is compatible with Swift 5.
 
 ## Installation
-``STTextView`` is available through [CocoaPods](https://cocoapods.org).
 
+``STTextView`` is available through [CocoaPods](https://cocoapods.org), [Carthage](https://github.com/Carthage/Carthage) and [Swift Package Manager](https://github.com/apple/swift-package-manager)
+
+### CocoaPods
 - Add the following line into your Podfile:
 
-	```ruby
+  ```ruby
   pod 'STTextView'
   ```
 
 - Then run this command in your terminal:
 
-	```bash
+  ```bash
   $ pod install
   ```
 
-- Now you have a UITextView with a placeholder!
+### Carthage
+- Add the following line into your Cartfile:
+
+  ```
+  github "onl1ner/STTextView"
+  ```
+  
+- And run the next command in terminal:
+
+  ```bash
+  $ carthage update
+  ```
+
+### Swift Package Manager
+- In Xcode select: 
+
+  ``File > Swift Packages > Add Package Dependency...``
+  
+- Then paste this URL: 
+
+  ``https://github.com/onl1ner/STTextView.git``
+
+### Manually
+You could also install it manually. Just drag and drop the ``STTextView.swift`` file into your Xcode project.
 
 ## Usage
 
