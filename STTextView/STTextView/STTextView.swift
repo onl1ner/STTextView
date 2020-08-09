@@ -22,7 +22,7 @@
 
 import UIKit
 
-@IBDesignable open class STTextView : UITextView, UITextViewDelegate {
+@IBDesignable open class STTextView : UITextView {
     
     /// Placeholder string that will be shown in your TextView.
     @IBInspectable public var placeholder : String = "Enter your placeholder" {
@@ -85,27 +85,24 @@ import UIKit
         return textView
     }()
     
-    public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        if textView.text.isEmpty {
+    @objc private func textDidBeginEditing() -> () {
+        if self.text.isEmpty {
             if shouldHidePlaceholderOnEditing {
                 placeholderTextView.isHidden = true
             }
         }
-        return true
     }
     
-    public func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        placeholderTextView.isHidden = !textView.text.isEmpty
-        return true
+    @objc private func textDidChange() -> () {
+        placeholderTextView.isHidden = !self.text.isEmpty
     }
-    
-    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentContent : NSString = NSString(string: textView.text)
-        let newContent = currentContent.replacingCharacters(in: range, with: text)
-        
-        self.placeholderTextView.isHidden = !newContent.isEmpty
-        
-        return true
+   
+    @objc private func textDidEndEditing() -> () {
+        if self.text.isEmpty {
+            if shouldHidePlaceholderOnEditing {
+                placeholderTextView.isHidden = false
+            }
+        }
     }
     
     // Method is used to update the placeholderTextView whenever
@@ -118,10 +115,16 @@ import UIKit
         placeholderTextView.textAlignment = self.textAlignment
     }
     
+    private func signForNotifications() -> () {
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidBeginEditing), name: UITextView.textDidBeginEditingNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidEndEditing), name: UITextView.textDidEndEditingNotification, object: nil)
+    }
+    
     private func initialConfiguration() -> () {
-        self.delegate = self
-        
         self.insertSubview(placeholderTextView, at: 0)
+        
+        signForNotifications()
     }
     
     public override func prepareForInterfaceBuilder() {
