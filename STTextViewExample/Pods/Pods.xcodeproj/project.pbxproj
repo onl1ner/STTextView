@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		22E6E4EAE78638DA67995B81A7180136 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		3B90D5E3CAC302F1DB647E63861028CB /* STTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F848C124DB83AFFB6A3ADB0E9A3C35 /* STTextView.swift */; };
 		3EDB31481ED0EEB2A637D656F21D9F4F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		7E1AFB69FC7D8DA993764A19A3F0A71D /* STTextView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 596CD51DDB5D5E2E3B7D4B13D39145EA /* STTextView-dummy.m */; };
+		49DBA904D37782DA83AEBE26B3418076 /* STTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA04A5050AC4FC8F0D3CC6FAC5EF1B7 /* STTextView.swift */; };
+		7E1AFB69FC7D8DA993764A19A3F0A71D /* STTextView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C273DFF0BD38D99EE27C0826AB2D7 /* STTextView-dummy.m */; };
 		804E6584AE2C7048EABA2E933A62E4E4 /* Pods-STTextViewExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C99B845540FD2D00638F7123EE142F3E /* Pods-STTextViewExample-dummy.m */; };
-		8790A23FBADD7A33557125CC3AE907DA /* STTextView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D330D578A1F31DFDA49FDD0844D9E116 /* STTextView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8790A23FBADD7A33557125CC3AE907DA /* STTextView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F9D2F9B83B853C2C525DDCD4844703E9 /* STTextView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		966321EDA0DF1CBF19A5EB6FD9E0A150 /* Pods-STTextViewExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B11E2D21C44BAF37F83D27E3D0BC985 /* Pods-STTextViewExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -28,25 +28,26 @@
 
 /* Begin PBXFileReference section */
 		0044BA31FA7C319828407BE1133CCD70 /* Pods-STTextViewExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STTextViewExample.debug.xcconfig"; sourceTree = "<group>"; };
+		0E30EC366F7F7343396488FAB2D28C00 /* STTextView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = STTextView.modulemap; sourceTree = "<group>"; };
 		122C93A2249EB0398471ED3B7A8FB055 /* Pods-STTextViewExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-STTextViewExample-acknowledgements.markdown"; sourceTree = "<group>"; };
-		28E7D499C185059BA8F141CDDC6FF598 /* STTextView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = STTextView.modulemap; sourceTree = "<group>"; };
-		28FDB16D7B623298FD6D90C7B59BC7DB /* STTextView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STTextView-prefix.pch"; sourceTree = "<group>"; };
 		2B11E2D21C44BAF37F83D27E3D0BC985 /* Pods-STTextViewExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-STTextViewExample-umbrella.h"; sourceTree = "<group>"; };
+		2C1C273DFF0BD38D99EE27C0826AB2D7 /* STTextView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "STTextView-dummy.m"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		596CD51DDB5D5E2E3B7D4B13D39145EA /* STTextView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "STTextView-dummy.m"; sourceTree = "<group>"; };
+		5AA04A5050AC4FC8F0D3CC6FAC5EF1B7 /* STTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = STTextView.swift; path = STTextView/STTextView.swift; sourceTree = "<group>"; };
 		781CD709E780926C92B24E7DAC676956 /* Pods-STTextViewExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STTextViewExample.release.xcconfig"; sourceTree = "<group>"; };
 		805FD82C59D1C4B51FA513235395909D /* Pods-STTextViewExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-STTextViewExample.modulemap"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9F160F43988F9F02FCF59B34EDDC7A7D /* STTextView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STTextView.xcconfig; sourceTree = "<group>"; };
 		9FAD6E960B7889BE061E9B022A271104 /* Pods-STTextViewExample-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STTextViewExample-Info.plist"; sourceTree = "<group>"; };
 		A8021F8D35B38D6D654E546C272652A4 /* STTextView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = STTextView.framework; path = STTextView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9641D4245E266B786B6F1F868F07D16 /* STTextView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = STTextView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B5364520F40C33146A979D4B889D9A81 /* Pods-STTextViewExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-STTextViewExample-frameworks.sh"; sourceTree = "<group>"; };
-		C7F848C124DB83AFFB6A3ADB0E9A3C35 /* STTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = STTextView.swift; path = STTextView/STTextView/STTextView.swift; sourceTree = "<group>"; };
+		BD697C87DFC8C7A25829594EC183D24C /* STTextView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STTextView-prefix.pch"; sourceTree = "<group>"; };
 		C99B845540FD2D00638F7123EE142F3E /* Pods-STTextViewExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-STTextViewExample-dummy.m"; sourceTree = "<group>"; };
-		D330D578A1F31DFDA49FDD0844D9E116 /* STTextView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STTextView-umbrella.h"; sourceTree = "<group>"; };
+		CF544A45255E324D23465B49AE472C8D /* STTextView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "STTextView-Info.plist"; sourceTree = "<group>"; };
 		E3C2ADC1BED07DF3B27357ABD73AF01D /* Pods-STTextViewExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STTextViewExample-acknowledgements.plist"; sourceTree = "<group>"; };
+		E84CA6EC7BFA84A3DCF5176D6B6B0857 /* STTextView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STTextView.xcconfig; sourceTree = "<group>"; };
 		F027A8D96B8FE42839E094695772B2A5 /* Pods_STTextViewExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_STTextViewExample.framework; path = "Pods-STTextViewExample.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB3B60432086B4985E6E99FED61C9D5B /* STTextView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "STTextView-Info.plist"; sourceTree = "<group>"; };
+		F9D2F9B83B853C2C525DDCD4844703E9 /* STTextView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STTextView-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,12 +70,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		38B5B767F9043DE9860A20D1C9B0EFE9 /* Pods */ = {
+		12D485B789BA9682A62888B93729B547 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3A5A40F3D6ACD525B3293483F64CA76A /* STTextView */,
+				0E30EC366F7F7343396488FAB2D28C00 /* STTextView.modulemap */,
+				E84CA6EC7BFA84A3DCF5176D6B6B0857 /* STTextView.xcconfig */,
+				2C1C273DFF0BD38D99EE27C0826AB2D7 /* STTextView-dummy.m */,
+				CF544A45255E324D23465B49AE472C8D /* STTextView-Info.plist */,
+				BD697C87DFC8C7A25829594EC183D24C /* STTextView-prefix.pch */,
+				F9D2F9B83B853C2C525DDCD4844703E9 /* STTextView-umbrella.h */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../STTextViewExample/Pods/Target Support Files/STTextView";
 			sourceTree = "<group>";
 		};
 		3996CE37A7DBA1F23410F11919F91BDC /* Pods-STTextViewExample */ = {
@@ -94,28 +101,20 @@
 			path = "Target Support Files/Pods-STTextViewExample";
 			sourceTree = "<group>";
 		};
-		3A5A40F3D6ACD525B3293483F64CA76A /* STTextView */ = {
+		6BECE0652446D16D99CFC72D941961BF /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				C7F848C124DB83AFFB6A3ADB0E9A3C35 /* STTextView.swift */,
-				A620048DF7C3827AD42CFBCCE0F1602B /* Support Files */,
+				A9641D4245E266B786B6F1F868F07D16 /* STTextView.podspec */,
 			);
-			name = STTextView;
-			path = STTextView;
+			name = Pod;
 			sourceTree = "<group>";
 		};
-		A620048DF7C3827AD42CFBCCE0F1602B /* Support Files */ = {
+		B30C0EFAEABBE87A2AC727B4E9DF851E /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				28E7D499C185059BA8F141CDDC6FF598 /* STTextView.modulemap */,
-				9F160F43988F9F02FCF59B34EDDC7A7D /* STTextView.xcconfig */,
-				596CD51DDB5D5E2E3B7D4B13D39145EA /* STTextView-dummy.m */,
-				FB3B60432086B4985E6E99FED61C9D5B /* STTextView-Info.plist */,
-				28FDB16D7B623298FD6D90C7B59BC7DB /* STTextView-prefix.pch */,
-				D330D578A1F31DFDA49FDD0844D9E116 /* STTextView-umbrella.h */,
+				E24F34B277C37E5B1BF49AB435C1F794 /* STTextView */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/STTextView";
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
@@ -130,8 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				B30C0EFAEABBE87A2AC727B4E9DF851E /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				38B5B767F9043DE9860A20D1C9B0EFE9 /* Pods */,
 				E75F0FAB97C1AFBB05BD69E73ED9431C /* Products */,
 				FA6EA902ED78F8131933D2B6E62658E2 /* Targets Support Files */,
 			);
@@ -143,6 +142,17 @@
 				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E24F34B277C37E5B1BF49AB435C1F794 /* STTextView */ = {
+			isa = PBXGroup;
+			children = (
+				5AA04A5050AC4FC8F0D3CC6FAC5EF1B7 /* STTextView.swift */,
+				6BECE0652446D16D99CFC72D941961BF /* Pod */,
+				12D485B789BA9682A62888B93729B547 /* Support Files */,
+			);
+			name = STTextView;
+			path = ../../STTextView;
 			sourceTree = "<group>";
 		};
 		E75F0FAB97C1AFBB05BD69E73ED9431C /* Products */ = {
@@ -231,7 +241,7 @@
 				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -279,7 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E1AFB69FC7D8DA993764A19A3F0A71D /* STTextView-dummy.m in Sources */,
-				3B90D5E3CAC302F1DB647E63861028CB /* STTextView.swift in Sources */,
+				49DBA904D37782DA83AEBE26B3418076 /* STTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +346,7 @@
 		};
 		64013D37CAED8CA5D2C37C74D85AE003 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F160F43988F9F02FCF59B34EDDC7A7D /* STTextView.xcconfig */;
+			baseConfigurationReference = E84CA6EC7BFA84A3DCF5176D6B6B0857 /* STTextView.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -437,7 +447,7 @@
 		};
 		9CA6904B8C4498B96212E6E368BB7C64 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F160F43988F9F02FCF59B34EDDC7A7D /* STTextView.xcconfig */;
+			baseConfigurationReference = E84CA6EC7BFA84A3DCF5176D6B6B0857 /* STTextView.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";

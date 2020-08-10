@@ -1,5 +1,5 @@
 target 'STTextViewExample' do
   use_frameworks!
   
-  pod "STTextView"
+  pod "STTextView", :path => '../STTextView/'
 end

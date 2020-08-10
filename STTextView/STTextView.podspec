@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
   spec.name           = "STTextView"
-  spec.version        = "1.1.1"
+  spec.version        = "1.1.2"
   
-  spec.summary        = "STTextView is a light-weight CocoaPod that adds a placeholder to the UITextView."
+  spec.summary        = "STTextView is a light-weight framework that adds a placeholder to the UITextView."
   
   spec.homepage       = "https://github.com/onl1ner/STTextView"
   spec.license        = "MIT"

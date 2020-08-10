@@ -1,16 +1,16 @@
 PODS:
-  - STTextView (1.0.1)
+  - STTextView (1.1.2)
 
 DEPENDENCIES:
-  - STTextView
+  - STTextView (from `../STTextView/`)
 
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - STTextView
+EXTERNAL SOURCES:
+  STTextView:
+    :path: "../STTextView/"
 
 SPEC CHECKSUMS:
-  STTextView: 67478041829eb038248c8d26bb37246c2bb60bc6
+  STTextView: 577a6060732556ac0d24baa02e8aa69960e4b550
 
-PODFILE CHECKSUM: 05c7be9c6a5ef4637b0d88ae662371d0f8d9a6b6
+PODFILE CHECKSUM: ec6d35d4ae11ce3271fa2f1d49a4dcde13a2af17
 
 COCOAPODS: 1.7.2

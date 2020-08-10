@@ -85,7 +85,7 @@ import UIKit
         return textView
     }()
     
-    @objc private func textDidBeginEditing() -> () {
+    @objc private func textDidBeginEditing(_ notification : Notification) -> () {
         if self.text.isEmpty {
             if shouldHidePlaceholderOnEditing {
                 placeholderTextView.isHidden = true
@@ -93,11 +93,11 @@ import UIKit
         }
     }
     
-    @objc private func textDidChange() -> () {
+    @objc private func textDidChange(_ notification : Notification) -> () {
         placeholderTextView.isHidden = !self.text.isEmpty
     }
    
-    @objc private func textDidEndEditing() -> () {
+    @objc private func textDidEndEditing(_ notification : Notification) -> () {
         if self.text.isEmpty {
             if shouldHidePlaceholderOnEditing {
                 placeholderTextView.isHidden = false
@@ -116,9 +116,9 @@ import UIKit
     }
     
     private func signForNotifications() -> () {
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidBeginEditing), name: UITextView.textDidBeginEditingNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidEndEditing), name: UITextView.textDidEndEditingNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidBeginEditing(_:)), name: UITextView.textDidBeginEditingNotification, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidEndEditing(_:)), name: UITextView.textDidEndEditingNotification, object: self)
     }
     
     private func initialConfiguration() -> () {
@@ -150,5 +150,11 @@ import UIKit
         super.init(coder: aDecoder)
         
         initialConfiguration()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UITextView.textDidBeginEditingNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UITextView.textDidChangeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UITextView.textDidEndEditingNotification, object: nil)
     }
 }

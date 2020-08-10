@@ -25,7 +25,8 @@ class TableViewController: UITableViewController {
     
     private func attributedTextExample() -> NSAttributedString {
         let attributes: [NSAttributedString.Key: Any] = [
-            .underlineStyle : NSUnderlineStyle.single.rawValue
+            .underlineStyle : NSUnderlineStyle.single.rawValue,
+            .font : UIFont.systemFont(ofSize: 15)
         ]
         
         return NSAttributedString(string: "Beautiful attributed placeholder text", attributes: attributes)
@@ -45,6 +46,7 @@ class TableViewController: UITableViewController {
         placeholderTextView.shouldHidePlaceholderOnEditing = hidePlaceholderSwitch.isOn
         
         attributedPlaceholderTextView.attributedPlaceholder = attributedTextExample()
+        attributedPlaceholderTextView.placeholderColor = .secondaryLabel
         
         hidePlaceholderSwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
         addTapGesture()
