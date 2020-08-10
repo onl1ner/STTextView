@@ -50,11 +50,15 @@ Framework is compatible with Swift 5.
 ### Swift Package Manager
 - In Xcode select: 
 
-  ``File > Swift Packages > Add Package Dependency...``
+  ```
+  File > Swift Packages > Add Package Dependency...
+  ```
   
 - Then paste this URL: 
 
-  ``https://github.com/onl1ner/STTextView.git``
+  ```
+  https://github.com/onl1ner/STTextView.git
+  ```
 
 ### Manually
 You could also install it manually. Just drag and drop the ``STTextView.swift`` file into your Xcode project.
@@ -64,6 +68,10 @@ You could also install it manually. Just drag and drop the ``STTextView.swift`` 
 ### Interface Builder
 
 Simply attach ``STTextView`` class to your UITextView object and you will be able to change the values through the Interface Builder.
+
+<p align="center">
+  <img src="https://github.com/onl1ner/onl1ner/blob/master/Resources/STTextView/Interface%20Builder.png?raw=true" height="280"/>
+</p>
 
 ### Swift
 
