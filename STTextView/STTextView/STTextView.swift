@@ -82,8 +82,13 @@ import UIKit
         textView.isUserInteractionEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         
+        textView.isHidden = !self.text.isEmpty
+        
         return textView
     }()
+    
+    private var heightConstraint : NSLayoutConstraint?
+    private var originHeightConstant : CGFloat?
     
     @objc private func textDidBeginEditing(_ notification : Notification) -> () {
         if self.text.isEmpty {
@@ -91,10 +96,17 @@ import UIKit
                 placeholderTextView.isHidden = true
             }
         }
+        updateContentSize()
     }
     
     @objc private func textDidChange(_ notification : Notification) -> () {
-        placeholderTextView.isHidden = !self.text.isEmpty
+        if shouldHidePlaceholderOnEditing {
+            if self.text.isEmpty {
+                placeholderTextView.isHidden = true
+            }
+        } else {
+            placeholderTextView.isHidden = !self.text.isEmpty
+        }
     }
    
     @objc private func textDidEndEditing(_ notification : Notification) -> () {
@@ -103,16 +115,44 @@ import UIKit
                 placeholderTextView.isHidden = false
             }
         }
+        updateContentSize()
     }
     
     // Method is used to update the placeholderTextView whenever
-    // the TextView changes in Interface Builder.
+    // the UITextView changes in Interface Builder.
     private func updatePlaceholder() -> () {
         placeholderTextView.text = placeholder
         placeholderTextView.textColor = placeholderColor
         
         placeholderTextView.font = self.font
         placeholderTextView.textAlignment = self.textAlignment
+        
+        placeholderTextView.frame = self.bounds
+    }
+    
+    // The content should be always visible
+    // even if it's just a placeholder text, so
+    // this function is solving the problem when a placeholder text
+    // did not fit in the UITextView if the height constraint's constant
+    // is less than the placeholder text.
+    private func updateContentSize() -> () {
+        if self.text.isEmpty {
+            if let constraint = heightConstraint, let originHeight = originHeightConstant {
+                let placeholderContentHeight = placeholderTextView.contentSize.height
+                
+                if shouldHidePlaceholderOnEditing && isFirstResponder {
+                    if originHeight < placeholderContentHeight {
+                        constraint.constant = originHeight
+                    }
+                } else {
+                    if constraint.constant < placeholderContentHeight {
+                        constraint.constant = placeholderContentHeight
+                    }
+                }
+            }
+        }
+        
+        placeholderTextView.frame = self.bounds
     }
     
     private func signForNotifications() -> () {
@@ -136,7 +176,18 @@ import UIKit
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        placeholderTextView.frame = self.bounds
+        // Getting an initial value of the height constraint's constant
+        if heightConstraint == nil {
+            for constraint in self.constraints {
+                if constraint.firstAttribute == .height {
+                    heightConstraint = constraint
+                    originHeightConstant = constraint.constant
+                    break
+                }
+            }
+        }
+        
+        updateContentSize()
     }
     
     public override init(frame: CGRect, textContainer: NSTextContainer?) {
