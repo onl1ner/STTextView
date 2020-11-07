@@ -24,18 +24,25 @@ import UIKit
 
 @IBDesignable open class STTextView : UITextView {
     
+    public enum PlaceholderVerticalAlignment : Int {
+        /// Placeholder text will align as textView's text.
+        case none
+        
+        /// Placeholder text will be centered horizontaly and verticaly.
+        case center
+        
+        /// Placeholder text will be on the bottom of textView.
+        case bottom
+    }
+    
     /// Placeholder string that will be shown in your TextView.
     @IBInspectable public var placeholder : String = "Enter your placeholder" {
-        didSet {
-            self.placeholderTextView.text = placeholder
-        }
+        didSet { self.placeholderTextView.text = self.placeholder }
     }
     
     /// Color that would be applied to your placeholder text.
     @IBInspectable public var placeholderColor : UIColor = .gray {
-        didSet {
-            self.placeholderTextView.textColor = placeholderColor
-        }
+        didSet { self.placeholderTextView.textColor = self.placeholderColor }
     }
     
     /// If true placeholder text will hide when user starts editing.
@@ -44,24 +51,30 @@ import UIKit
     /// Attributed placeholder to show your attributed string.
     public var attributedPlaceholder : NSAttributedString? {
         didSet {
-            if attributedPlaceholder != nil {
+            if self.attributedPlaceholder != nil {
                 self.placeholderTextView.text = nil
-                self.placeholderTextView.attributedText = attributedPlaceholder
+                self.placeholderTextView.attributedText = self.attributedPlaceholder
             }
         }
     }
     
-    // We have to check if text property is changing at runtime.
-    public override var text: String! {
-        didSet {
-            self.placeholderTextView.isHidden = !self.text.isEmpty
-        }
+    /// Placeholder text's vertical alignment. Please note that if you will use center or bottom alignment
+    /// the `shouldHidePlaceholderOnEditing` property will be always true.
+    public var placeholderVerticalAlignment : PlaceholderVerticalAlignment = .none {
+        didSet { self.recalculatePlaceholderInset() }
     }
     
-    public override var contentInset: UIEdgeInsets {
-        didSet {
-            self.placeholderTextView.contentInset = self.contentInset
-        }
+    // We have to check if text property is changing at runtime.
+    public override var text: String! {
+        didSet { self.placeholderTextView.isHidden = !self.text.isEmpty }
+    }
+    
+    public override var textContainerInset: UIEdgeInsets {
+        didSet { self.placeholderTextView.textContainerInset = self.textContainerInset }
+    }
+    
+    public override var font: UIFont? {
+        didSet { self.placeholderTextView.font = self.font }
     }
     
     lazy private var placeholderTextView : UITextView = {
@@ -73,7 +86,7 @@ import UIKit
         textView.font = self.font
         
         textView.textAlignment = self.textAlignment
-        textView.contentInset = self.contentInset
+        textView.textContainerInset = self.textContainerInset
         
         textView.frame = self.bounds
         
@@ -92,55 +105,57 @@ import UIKit
     
     @objc private func textDidBeginEditing(_ notification : Notification) -> () {
         if self.text.isEmpty {
-            if shouldHidePlaceholderOnEditing {
-                placeholderTextView.isHidden = true
+            if self.shouldHidePlaceholderOnEditing {
+                self.placeholderTextView.isHidden = true
             }
         }
-        updateContentSize()
+        
+        self.updateContentSize()
     }
     
     @objc private func textDidChange(_ notification : Notification) -> () {
-        if shouldHidePlaceholderOnEditing {
+        if self.shouldHidePlaceholderOnEditing {
             if self.text.isEmpty {
-                placeholderTextView.isHidden = true
+                self.placeholderTextView.isHidden = true
             }
         } else {
-            placeholderTextView.isHidden = !self.text.isEmpty
+            self.placeholderTextView.isHidden = !self.text.isEmpty
         }
     }
    
     @objc private func textDidEndEditing(_ notification : Notification) -> () {
         if self.text.isEmpty {
-            if shouldHidePlaceholderOnEditing {
-                placeholderTextView.isHidden = false
+            if self.shouldHidePlaceholderOnEditing {
+                self.placeholderTextView.isHidden = false
             }
         }
-        updateContentSize()
+        
+        self.updateContentSize()
     }
     
     // Method is used to update the placeholderTextView whenever
     // the UITextView changes in Interface Builder.
     private func updatePlaceholder() -> () {
-        placeholderTextView.text = placeholder
-        placeholderTextView.textColor = placeholderColor
+        self.placeholderTextView.text = self.placeholder
+        self.placeholderTextView.textColor = self.placeholderColor
         
-        placeholderTextView.font = self.font
-        placeholderTextView.textAlignment = self.textAlignment
+        self.placeholderTextView.font = self.font
+        self.placeholderTextView.textAlignment = self.textAlignment
         
-        placeholderTextView.frame = self.bounds
+        self.placeholderTextView.frame = self.bounds
     }
     
     // The content should be always visible
-    // even if it's just a placeholder text, so
-    // this function is solving the problem when a placeholder text
+    // even if it's just a placeholder text.
+    // This function is solving the problem when a placeholder text
     // did not fit in the UITextView if the height constraint's constant
     // is less than the placeholder text.
     private func updateContentSize() -> () {
         if self.text.isEmpty {
-            if let constraint = heightConstraint, let originHeight = originHeightConstant {
-                let placeholderContentHeight = placeholderTextView.contentSize.height
+            if let constraint = self.heightConstraint, let originHeight = self.originHeightConstant {
+                let placeholderContentHeight = self.placeholderTextView.contentSize.height
                 
-                if shouldHidePlaceholderOnEditing && isFirstResponder {
+                if self.shouldHidePlaceholderOnEditing && self.isFirstResponder {
                     if originHeight < placeholderContentHeight {
                         constraint.constant = originHeight
                     }
@@ -152,7 +167,46 @@ import UIKit
             }
         }
         
-        placeholderTextView.frame = self.bounds
+        self.placeholderTextView.frame = self.bounds
+    }
+    
+    private func applyCenterAlignment() -> () {
+        // Inset for center alignment of a placeholderText will be:
+        // ((textView's height) - (placeholder's content height) * (zoom)) / 2.
+        let rootTextViewHeight = self.bounds.size.height
+        let placeholderTextViewHeight = self.placeholderTextView.contentSize.height
+        let placeholderTextViewZoom = self.placeholderTextView.zoomScale
+        
+        var inset = (rootTextViewHeight - (placeholderTextViewHeight * placeholderTextViewZoom)) / 2
+        inset = inset < 0.0 ? 0.0 : inset
+        
+        self.placeholderTextView.contentInset.top = inset
+        self.shouldHidePlaceholderOnEditing = true
+    }
+    
+    private func applyBottomAlignment() -> () {
+        // Inset for bottom alignment of a placeholderText will be:
+        // (textView's height) - (placeholder's content height) * (zoom).
+        let rootTextViewHeight = self.bounds.size.height
+        let placeholderTextViewHeight = self.placeholderTextView.contentSize.height
+        let placeholderTextViewZoom = self.placeholderTextView.zoomScale
+        
+        var inset = (rootTextViewHeight - (placeholderTextViewHeight * placeholderTextViewZoom))
+        inset = inset < 0.0 ? 0.0 : inset
+        
+        self.placeholderTextView.contentInset.top = inset
+        self.shouldHidePlaceholderOnEditing = true
+    }
+    
+    // Calculating the inset for a content
+    // from the top to align the text
+    // inside placeholderTextView.
+    private func recalculatePlaceholderInset() -> () {
+        switch placeholderVerticalAlignment {
+            case .none: self.placeholderTextView.textContainerInset = self.textContainerInset
+            case .center: self.applyCenterAlignment()
+            case .bottom: self.applyBottomAlignment()
+        }
     }
     
     private func signForNotifications() -> () {
@@ -162,45 +216,42 @@ import UIKit
     }
     
     private func initialConfiguration() -> () {
-        self.insertSubview(placeholderTextView, at: 0)
-        
-        signForNotifications()
+        self.insertSubview(self.placeholderTextView, at: 0)
+        self.signForNotifications()
     }
     
     public override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        
-        updatePlaceholder()
+        self.updatePlaceholder()
     }
     
     public override func layoutSubviews() {
         super.layoutSubviews()
         
         // Getting an initial value of the height constraint's constant
-        if heightConstraint == nil {
+        if self.heightConstraint == nil {
             for constraint in self.constraints {
                 if constraint.firstAttribute == .height {
-                    heightConstraint = constraint
-                    originHeightConstant = constraint.constant
+                    self.heightConstraint = constraint
+                    self.originHeightConstant = constraint.constant
                     break
                 }
             }
         }
         
-        updateContentSize()
+        self.updateContentSize()
+        self.recalculatePlaceholderInset()
     }
     
     public override init(frame: CGRect, textContainer: NSTextContainer?) {
         // To avoid Interface Builder render and auto-layout issues
         super.init(frame: frame, textContainer: textContainer)
-        
-        initialConfiguration()
+        self.initialConfiguration()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        initialConfiguration()
+    required public init?(coder : NSCoder) {
+        super.init(coder: coder)
+        self.initialConfiguration()
     }
     
     deinit {

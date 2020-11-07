@@ -9,7 +9,7 @@
 ![](https://img.shields.io/badge/Swift-5-orange?logo=Swift&logoColor=white)
 ![](https://img.shields.io/github/last-commit/onl1ner/STTextView)
 
-**STTextView** – easy and clean framework written in Swift. The framework adds a custom UITextView subclass with a needed ``placeholder`` property.
+**STTextView** – easy and clean library written in Swift. The framework adds a custom UITextView subclass with a needed ``placeholder`` property.
 
 
 ## Requirements
